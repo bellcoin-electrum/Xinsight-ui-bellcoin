@@ -30,18 +30,18 @@ angular.module('insight.currency').controller('CurrencyController',
 
         if (this.symbol === 'USD') {
           response = _roundFloat((value * this.factor), 2);
-        } else if (this.symbol === 'Mocha') {
-          this.factor = 10000;
-          response = _roundFloat((value * this.factor), 0);
-        } else if (this.symbol === 'mXPC') {
+        } else if (this.symbol === 'mBELL') {
           this.factor = 1000;
-          response = _roundFloat((value * this.factor), 1);
-        } else { // assumes symbol is XPC
+          response = _roundFloat((value * this.factor), 5);
+        } else if (this.symbol === 'bits') {
+          this.factor = 1000000;
+          response = _roundFloat((value * this.factor), 2);
+        } else { // assumes symbol is BELL
           this.factor = 1;
-          response = _roundFloat((value * this.factor), 4);
+          response = _roundFloat((value * this.factor), 8);
         }
         // prevent sci notation
-        if (response < 1e-3) response=response.toFixed(4);
+        if (response < 1e-7) response=response.toFixed(8);
 
         return _commaDelimit(response) + ' ' + this.symbol;
       }
@@ -64,18 +64,18 @@ angular.module('insight.currency').controller('CurrencyController',
 
         if (this.symbol === 'USD') {
           response = _roundFloat((value * this.factor), 2);
-        } else if (this.symbol === 'Mocha') {
-          this.factor = 10000;
-          response = _roundFloat((value * this.factor), 0);
-        } else if (this.symbol === 'mXPC') {
+        } else if (this.symbol === 'mBELL') {
           this.factor = 1000;
-          response = _roundFloat((value * this.factor), 1);
-        } else { // assumes symbol is XPC
+          response = _roundFloat((value * this.factor), 5);
+        } else if (this.symbol === 'bits') {
+          this.factor = 1000000;
+          response = _roundFloat((value * this.factor), 2);
+        } else { // assumes symbol is BELL
           this.factor = 1;
-          response = _roundFloat((value * this.factor), 4);
+          response = _roundFloat((value * this.factor), 8);
         }
         // prevent sci notation
-        if (response < 1e-3) response=response.toFixed(4);
+        if (response < 1e-7) response=response.toFixed(8);
 
         if(!isminus){
           return '+ ' + _commaDelimit(response) + ' ' + this.symbol;
@@ -95,10 +95,10 @@ angular.module('insight.currency').controller('CurrencyController',
         Currency.get({}, function(res) {
           $rootScope.currency.factor = $rootScope.currency.bitstamp = res.data.bitstamp;
         });
-      } else if (currency === 'Mocha') {
-        $rootScope.currency.factor = 10000;
-      } else if (currency === 'mXPC') {
+      } else if (currency === 'mBELL') {
         $rootScope.currency.factor = 1000;
+      } else if (currency === 'bits') {
+        $rootScope.currency.factor = 1000000;
       } else {
         $rootScope.currency.factor = 1;
       }
