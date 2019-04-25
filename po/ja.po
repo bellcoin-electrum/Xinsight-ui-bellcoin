@@ -447,7 +447,7 @@ msgstr "今日"
 
 #: public/views/status.html
 msgid "Total Amount"
-msgstr "Bitcoin総量"
+msgstr "Bellcoin総量"
 
 #: public/views/address.html
 msgid "Total Received"
